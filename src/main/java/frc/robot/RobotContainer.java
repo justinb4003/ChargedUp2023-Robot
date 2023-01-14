@@ -35,8 +35,8 @@ public class RobotContainer {
   public static Gyro gyro = new Gyro();
   public static SwerveDriveTrain swerveDrive = new SwerveDriveTrain();
   public static Limelight limelight = new Limelight();
-  public static PixyCam2 pixyCam2; // = new PixyCam2();
-  public static Pixycam pixycam;
+  //public static PixyCam2 pixyCam2; // = new PixyCam2();
+  //public static Pixycam pixycam;
   public static Shooter shooter = new Shooter();
   public static BallIntake ballIntake = new BallIntake();
   public static BallEntry ballEntry = new BallEntry();

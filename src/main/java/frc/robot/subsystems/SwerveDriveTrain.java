@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.Notifier;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.SerialPort.Port;
@@ -54,21 +55,25 @@ public class SwerveDriveTrain extends SubsystemBase implements Runnable {
   double goalY = 27*6;
   double kP = 0.015;
 
-  // TODO: Will need to replace the gyro here with the navX system
-  
 
+  private final SwerveModulePosition[] defaultPos = new SwerveModulePosition[] {
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+    new SwerveModulePosition(0, new Rotation2d(0)),
+  } ;
   private final SwerveDriveKinematics m_kinematics =
       new SwerveDriveKinematics(
           m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
   private final SwerveDriveOdometry m_odometry =
-      new SwerveDriveOdometry(m_kinematics, RobotContainer.gyro.getRotation2d());
+      new SwerveDriveOdometry(m_kinematics, RobotContainer.gyro.getRotation2d(), defaultPos);
 
   public SwerveDriveTrain() {
     RobotContainer.gyro.reset();
     notifier = new Notifier(this);
     notifier.startPeriodic(0.01);
-    m_odometry.resetPosition(new Pose2d(), new Rotation2d());
+    m_odometry.resetPosition(new Rotation2d(), defaultPos, new Pose2d());
   }
 
   public void setDriveAligned(boolean aligned) {
@@ -119,13 +124,14 @@ public class SwerveDriveTrain extends SubsystemBase implements Runnable {
   }
 
   public void resetOdometry() {
-    m_odometry.resetPosition(new Pose2d(), RobotContainer.gyro.getRotation2d());
+    m_odometry.resetPosition(new Rotation2d(), defaultPos, new Pose2d());
   }
 
   public void setOdometry(double x, double y, double heading) {
     RobotContainer.gyro.setInitialHeading(heading);
-    m_odometry.resetPosition(new Pose2d(x, y, new Rotation2d(heading * Math.PI/180)), 
-                  RobotContainer.gyro.getRotation2d());
+    m_odometry.resetPosition(RobotContainer.gyro.getRotation2d(), 
+                             defaultPos,
+                             new Pose2d(x, y, new Rotation2d(heading * Math.PI/180)));
   }
 
   public void setBrakeMode() {
@@ -146,10 +152,12 @@ public class SwerveDriveTrain extends SubsystemBase implements Runnable {
   public void updateOdometry() {
     m_odometry.update(
         RobotContainer.gyro.getRotation2d(),
-        m_frontLeft.getState(),
-        m_frontRight.getState(),
-        m_backLeft.getState(),
-        m_backRight.getState());
+        new SwerveModulePosition[] {
+          m_frontLeft.getState(),
+          m_frontRight.getState(),
+          m_backLeft.getState(),
+          m_backRight.getState(),
+        });
   }
 
   public SwerveDriveOdometry getOdometry() {

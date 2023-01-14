@@ -5,9 +5,9 @@
 package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+// import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
+// import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 
 public class DriveToCargo extends CommandBase {
   boolean blue;
@@ -31,6 +31,7 @@ public class DriveToCargo extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    /*
     Block block;
     if(blue) block = RobotContainer.pixyCam2.getBlueBlock();
     else block = RobotContainer.pixyCam2.getRedBlock();
@@ -50,6 +51,7 @@ public class DriveToCargo extends CommandBase {
     double yDifference = block.getY() - 120;
     double rotationPower = 0.02 * yDifference;
     RobotContainer.swerveDrive.drive(-0.45 * RobotContainer.swerveDrive.kMaxSpeed, 0, rotationPower);
+    */
   }
 
   // Called once the command ends or is interrupted.
