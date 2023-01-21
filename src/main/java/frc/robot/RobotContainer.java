@@ -124,14 +124,14 @@ public class RobotContainer {
 
     operatorLBumper.whenPressed(new SetIntake(true));
     operatorRBumper.whenPressed(new SetIntake(false));
-    operatorX.whenPressed(new SetShot(ShotData.FEET12));
-    operatorA.whenPressed(new SetShot(ShotData.FEET10));
-    operatorY.whenPressed(new SetShot(ShotData.FEET16));
+    //operatorX.whenPressed(new SetShot(ShotData.FEET12));
+    // operatorA.whenPressed(new SetShot(ShotData.FEET10));
+    //operatorY.whenPressed(new SetShot(ShotData.FEET16));
     //operatorB.whenPressed(new SetShot(ShotData.BUMPER));
     
     operatorB.whenPressed(new SetShot(ShotData.FEET6));
     operatorStart.whenPressed(new SetShot(ShotData.FEET8));
-    operatorBack.whenPressed(new SetShot(ShotData.LOWGOAL));
+    operatorBack.whenPressed(new SetShot(ShotData.LOWGOAL, true));
     operatorLeftTrigger.whenActive(new SetShooterOn(true));
     operatorRightTrigger.whenActive(new SetShooterOn(false));
     operatorDPadUp.whenActive(new LockHanger(false));

@@ -55,7 +55,6 @@ public class BallStateMachine extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
     if (RobotContainer.operator.getPOV() == 90) {
       RobotContainer.shooter.setPercentOutput(-0.5);
       RobotContainer.ballDelivery.backOut();
@@ -68,10 +67,10 @@ public class BallStateMachine extends SubsystemBase {
     if (RobotContainer.operator.getLeftY() > 0.5) {
       RobotContainer.ballIntake.backOut();
       RobotContainer.ballEntry.backOut();
-      //RobotContainer.ballDelivery.backOut();
+      RobotContainer.ballDelivery.backOut();
       return;
     }
-    boolean debug = false;
+    boolean debug = true;
     boolean bottomOn;
     boolean topOn;
     if (debug) {
@@ -88,6 +87,8 @@ public class BallStateMachine extends SubsystemBase {
     
     SmartDashboard.putBoolean("Top Eye", topOn);
     SmartDashboard.putBoolean("Bottom Eye", bottomOn);
+    SmartDashboard.putNumber("Top Voltage", topPhotoEye.getVoltage());
+    System.out.println(topPhotoEye.getVoltage());
     boolean intakeSubsystemOn = false;
     boolean entrySubsystemOn = false;
     boolean deliverySubsystemOn = false;
@@ -143,7 +144,6 @@ public class BallStateMachine extends SubsystemBase {
         break;
       }
     }
-
     intakeSubsystemOn = true;
     entrySubsystemOn = true;
     deliverySubsystemOn = true;
@@ -154,10 +154,11 @@ public class BallStateMachine extends SubsystemBase {
         intakeSubsystemOn = false;
       }
     }
-
+    //System.out.println(RobotContainer.shooter.isUpToSpeed() + " | " + shooterOn);
     if (shooterOn && RobotContainer.shooter.isUpToSpeed()) {
       deliverySubsystemOn = true;
       entrySubsystemOn = true;
+      System.out.println("Up to speed");
     }
     //System.out.println(shooterOn);
     if (intakeOn || (shooterOn && RobotContainer.shooter.isUpToSpeed())) {
@@ -167,6 +168,7 @@ public class BallStateMachine extends SubsystemBase {
       else {
         RobotContainer.ballIntake.setPowerOn(false);
       }
+      System.out.println("Setting power");
       RobotContainer.ballEntry.setPowerOn(entrySubsystemOn);
       RobotContainer.ballDelivery.setPowerOn(deliverySubsystemOn);
       

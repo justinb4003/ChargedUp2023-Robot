@@ -39,9 +39,10 @@ public class Shooter extends SubsystemBase {
   }
   
   public boolean isUpToSpeed() {
-    if (Math.abs(speed) < 100) return false;
-    //return Math.abs(bottom.getSelectedSensorVelocity() - speed)/speed < 0.20;
     return true;
+    // if (Math.abs(speed) < 100) return false;
+    //return Math.abs(bottom.getSelectedSensorVelocity() - speed)/speed < 0.20;
+    // return true;
   }
 
   public void incrementSpeed(double increment) {
