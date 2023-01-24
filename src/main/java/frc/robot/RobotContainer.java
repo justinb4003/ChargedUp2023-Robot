@@ -39,6 +39,7 @@ public class RobotContainer {
   //public static Pixycam pixycam;
   public static Shooter shooter = new Shooter();
   public static BallIntake ballIntake = new BallIntake();
+  public static TempIntake tempIntake = new TempIntake();
   public static BallEntry ballEntry = new BallEntry();
   public static BallDelivery ballDelivery = new BallDelivery();
   public static BallStateMachine ballStateMachine = new BallStateMachine();
@@ -94,6 +95,8 @@ public class RobotContainer {
     driverB.whenPressed(new SetFieldRelative(true));
     driverY.whenPressed(new AlignToTarget());
     driverBackButton.whenPressed(new AlignToBar());
+    driverLBumper.whenPressed(new SetTempIntake(true));
+    driverRBumper.whenPressed(new SetTempIntake(false));
     //driverStartButton.whenPressed(new ToggleDiverter());
     
     driverA.whenPressed(new ToggleDriveAligned());

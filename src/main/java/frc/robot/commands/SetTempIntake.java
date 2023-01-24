@@ -8,18 +8,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.Pneumatics;
 
-public class SetIntake extends CommandBase {
+public class SetTempIntake extends CommandBase {
   /** Creates a new SetIntake. */
   boolean on;
-  public SetIntake(boolean on) {
+  public SetTempIntake(boolean on) {
     this.on = on;
+    System.out.println("SetTempIntake: " + on);
+    RobotContainer.tempIntake.setPowerOn(on); // BAD
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //RobotContainer.ballStateMachine.setIntakeOn(on);
+    RobotContainer.tempIntake.setPowerOn(on);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

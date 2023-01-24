@@ -88,7 +88,7 @@ public class BallStateMachine extends SubsystemBase {
     SmartDashboard.putBoolean("Top Eye", topOn);
     SmartDashboard.putBoolean("Bottom Eye", bottomOn);
     SmartDashboard.putNumber("Top Voltage", topPhotoEye.getVoltage());
-    System.out.println(topPhotoEye.getVoltage());
+    //System.out.println(topPhotoEye.getVoltage());
     boolean intakeSubsystemOn = false;
     boolean entrySubsystemOn = false;
     boolean deliverySubsystemOn = false;
