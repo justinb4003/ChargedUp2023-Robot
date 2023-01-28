@@ -189,6 +189,11 @@ public class SwerveDriveTrain extends SubsystemBase implements Runnable {
     updateOdometry();
   }
 
+  public SwerveModule[] getModules() {
+    SwerveModule[] modules = new SwerveModule[]{m_backRight, m_backLeft, m_frontRight, m_frontLeft};
+    return modules;
+  }
+
     @Override
     public void periodic() {
       // This method will be called once per scheduler run

@@ -87,6 +87,7 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
     //System.out.println("Compressor: " + compressor.getPressure());
     ///System.out.println(RobotContainer.swerveDrive.getOdometry().getPoseMeters());
+    RobotTelemetry.monitorData();
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
