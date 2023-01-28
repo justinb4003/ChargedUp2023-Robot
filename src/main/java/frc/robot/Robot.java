@@ -65,9 +65,9 @@ public class Robot extends TimedRobot {
     });
     
 
-    compressor = new Compressor(2, PneumaticsModuleType.REVPH);
+    // compressor = new Compressor(2, PneumaticsModuleType.REVPH);
     //compressor.enableAnalog(80, 115);
-    compressor.enableDigital();
+    // compressor.enableDigital();
     
   }
 
@@ -115,7 +115,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    //System.out.println(RobotContainer.swerveDrive.getOdometry().getPoseMeters());
+    RobotContainer.swerveDrive.updateOdometry();
+    System.out.println(RobotContainer.swerveDrive.getOdometry().getPoseMeters());
   }
 
   @Override
@@ -155,6 +156,9 @@ public class Robot extends TimedRobot {
     //RobotContainer.pneumatics.setValve(Pneumatics.DIVERTER, RobotContainer.operator.getBButton()); 
     SmartDashboard.putNumber("Bottom shooter speed", RobotContainer.shooter.getBottomSpeed());
     SmartDashboard.putNumber("Top shooter speed", RobotContainer.shooter.getTopSpeed());
+    SmartDashboard.putNumber("Yaw", RobotContainer.gyro.getYaw());
+    SmartDashboard.putNumber("Pitch", RobotContainer.gyro.getPitch());
+    SmartDashboard.putNumber("Roll", RobotContainer.gyro.getRoll());
   }
 
   @Override

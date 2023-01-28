@@ -95,8 +95,8 @@ public class RobotContainer {
     driverB.whenPressed(new SetFieldRelative(true));
     driverY.whenPressed(new AlignToTarget());
     driverBackButton.whenPressed(new AlignToBar());
-    driverLBumper.whenPressed(new SetTempIntake(true));
-    driverRBumper.whenPressed(new SetTempIntake(false));
+    driverLBumper.whileActiveContinuous(new SetTempIntake(true));
+    driverRBumper.whileActiveContinuous(new SetTempIntake(false));
     //driverStartButton.whenPressed(new ToggleDiverter());
     
     driverA.whenPressed(new ToggleDriveAligned());
@@ -125,8 +125,8 @@ public class RobotContainer {
     XboxTrigger operatorLeftTrigger = new XboxTrigger(operator, XboxTrigger.LEFT_TRIGGER);
     XboxTrigger operatorRightTrigger = new XboxTrigger(operator, XboxTrigger.RIGHT_TRIGGER);
 
-    operatorLBumper.whenPressed(new SetIntake(true));
-    operatorRBumper.whenPressed(new SetIntake(false));
+    // operatorLBumper.whenPressed(new SetIntake(true));
+    // operatorRBumper.whenPressed(new SetIntake(false));
     //operatorX.whenPressed(new SetShot(ShotData.FEET12));
     // operatorA.whenPressed(new SetShot(ShotData.FEET10));
     //operatorY.whenPressed(new SetShot(ShotData.FEET16));
@@ -157,6 +157,7 @@ public class RobotContainer {
     //m_autoCommand = new LeftTwoBall();
     //m_autoCommand = new CenterFourBall();
     m_autoCommand = (Command)chooser.getSelected();
+    m_autoCommand = new DriveUpRamp();
     return m_autoCommand;
   }
 }

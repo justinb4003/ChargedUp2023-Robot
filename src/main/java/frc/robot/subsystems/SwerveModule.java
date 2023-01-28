@@ -78,7 +78,8 @@ public class SwerveModule {
    * @return The current state of the module.
    */
   public SwerveModulePosition getState() {
-    return new SwerveModulePosition(0, new Rotation2d(getTurnPositionInradians()));
+    double distance = m_driveMotor.getSelectedSensorPosition() /kDriveResolution * 2 * Math.PI * kEffectiveRadius;
+    return new SwerveModulePosition(distance, new Rotation2d(getTurnPositionInradians()));
   }
 
   /**

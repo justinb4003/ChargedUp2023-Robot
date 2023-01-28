@@ -28,6 +28,16 @@ public class Gyro extends SubsystemBase {
     gyro.reset();
   }
 
+  public double getYaw() {
+   return gyro.getAngle();
+  }
+
+  public double getPitch() {
+    return gyro.getPitch();
+  }
+  public double getRoll() {
+    return gyro.getRoll();
+  }
   public Rotation2d getRotation2d() {
     return gyro.getRotation2d().plus(initialHeading);
   }

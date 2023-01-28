@@ -13,25 +13,31 @@ import frc.robot.Constants;
 public class TempIntake extends SubsystemBase {
   VictorSPX intakeMotor;
   VictorSPX intakeMotor2;
+  boolean powerOn = false;
   /** Creates a new TempIntake. */
   public TempIntake() {
-    intakeMotor = new VictorSPX(4);
-    intakeMotor2 = new VictorSPX(5);
-    intakeMotor2.setInverted (false);
+    intakeMotor = new VictorSPX(40);
+    intakeMotor2 = new VictorSPX(50);
+    intakeMotor2.setInverted(true);
   }
-
-  public void setPowerOn(boolean on) {
-    System.out.println("Seting temp intake: " + on);
-    if(on) {
-      intakeMotor.set(VictorSPXControlMode.PercentOutput, 0.8);
-      intakeMotor2.set(VictorSPXControlMode.PercentOutput, 0.8);
+  public void togglePower(){
+    powerOn = ! powerOn;
+  }
+  public void setPowerOn() {
+    System.out.println("Seting temp intake: " + powerOn);
+    if(powerOn) {
+      intakeMotor.set(VictorSPXControlMode.PercentOutput, 1);
+      intakeMotor2.set(VictorSPXControlMode.PercentOutput, 1);
     } else {
       intakeMotor.set(VictorSPXControlMode.PercentOutput, 0);
       intakeMotor2.set(VictorSPXControlMode.PercentOutput, 0);
     }
     
   }
-
+  public void setPower(double power){
+    intakeMotor.set(VictorSPXControlMode.PercentOutput, power);
+    intakeMotor2.set(VictorSPXControlMode.PercentOutput, power);
+  }
   public void backOut() {
     intakeMotor.set(VictorSPXControlMode.PercentOutput, -0.8);
     intakeMotor2.set(VictorSPXControlMode.PercentOutput, -0.8);
@@ -39,6 +45,6 @@ public class TempIntake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+   //This method will be called once per scheduler run
   }
 }

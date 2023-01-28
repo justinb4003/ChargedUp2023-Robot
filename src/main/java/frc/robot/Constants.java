@@ -17,8 +17,9 @@ public final class Constants {
     // swerve drive modules:  10, 11, 12, 13, 20, 21, 22, 23
     public static final int BALLDELIVERYLEADER = 30;
     public static final int BALLDELIVERYFOLLOWER = 31;
-    public static final int BALLINTAKE = 40;
-    public static final int BALLENTRYLEADER = 50;
+    public static final int BALLINTAKE = 40;//was 40
+    
+    public static final int BALLENTRYLEADER = 50;//was 50
     public static final int BALLENTRYFOLLOWER = 51;
     public static final int LEFTSHOOTER = 60;
     public static final int RIGHTSHOOTER = 61;
