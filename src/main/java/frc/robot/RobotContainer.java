@@ -157,7 +157,7 @@ public class RobotContainer {
     //m_autoCommand = new LeftTwoBall();
     //m_autoCommand = new CenterFourBall();
     m_autoCommand = (Command)chooser.getSelected();
-    m_autoCommand = new DriveUpRamp();
+    m_autoCommand = new DriveToFieldPosition(0, 0);
     return m_autoCommand;
   }
 }

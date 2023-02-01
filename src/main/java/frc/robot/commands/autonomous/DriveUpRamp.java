@@ -39,9 +39,11 @@ public class DriveUpRamp extends CommandBase {
     RobotContainer.swerveDrive.setFieldRelative(false);
   }
 
-  double kp = 0.2 / 15;
+  double kp = 0.11 / 15;
   // double kp = 0.10 / 15;
   double ki = 0.0 / 75;
+  double kd = kp * 8;
+  double lastRoll;
 
   
   // Called every time the scheduler runs while the command is scheduled.
@@ -65,19 +67,21 @@ public class DriveUpRamp extends CommandBase {
         break;
       }
       case DRIVEDISTANCE:{
-        RobotContainer.swerveDrive.drive(.3* SwerveDriveTrain.kMaxSpeed, 0, 0);
         Pose2d currentPose = RobotContainer.swerveDrive.getOdometry().getPoseMeters();
         double deltaX = currentPose.getX() - initialPose.getX();
         double deltaY = currentPose.getY() - initialPose.getY();
         double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        if (distance > 32) state = VIBE; 
+        //if (distance > 28) state = VIBE; 
         System.out.println(distance);
+        double power = .4;
+        if (distance > 20)power = .3;
+        RobotContainer.swerveDrive.drive(power * SwerveDriveTrain.kMaxSpeed, 0, 0);
         break;
       }
       case VIBE: {
         totalRoll = roll + totalRoll * 0.6;
-        double power = kp * roll + ki * totalRoll;
-        // if (roll < 10) state = LEVELOFF;
+        double power = kp * roll + ki * totalRoll + kd * (roll - lastRoll);
+       // if (roll < 5) state = LEVELOFF;
         RobotContainer.swerveDrive.drive(power * SwerveDriveTrain.kMaxSpeed, 0, 0);
         //if (roll < 1) state = END;
         break;
@@ -89,6 +93,7 @@ public class DriveUpRamp extends CommandBase {
         break;
       }
     }
+    lastRoll = roll;
   }
 
   // Called once the command ends or is interrupted.

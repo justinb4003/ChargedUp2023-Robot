@@ -117,7 +117,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     RobotContainer.swerveDrive.updateOdometry();
-    System.out.println(RobotContainer.swerveDrive.getOdometry().getPoseMeters());
+    //System.out.println(RobotContainer.swerveDrive.getOdometry().getPoseMeters());
   }
 
   @Override
